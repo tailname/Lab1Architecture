@@ -37,7 +37,7 @@ tar -czvf $HOME/backup/oldest_files.tar.gz -C $folder_path $oldest_files
 
 for file in $oldest_files; do
   echo "Удаляем файл $file"
-  #rm $folder_path'/'$file
+  rm $folder_path'/'$file
 done
 
 # Возвращаем код 0, если все прошло успешно
