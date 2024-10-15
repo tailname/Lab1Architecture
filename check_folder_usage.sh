@@ -31,12 +31,13 @@ if [ $persent_of_full -lt $2 ]; then
   exit 0
 fi
 N=10
-oldest_files=$(find $folder_path -type f -printf '%T+ %p\n' 2>/dev/null | sort | awk -F $folder_path+"/" 'NR<=10 {print $2}' )
-$(tar -czvf $HOME/backup/oldest_files.tar.gz -C $folder_path $oldest_files )
+oldest_files=$(find $folder_path -type f -printf '%T+ %p\n' 2>/dev/null | sort | awk -F $folder_path 'NR<=$N {print $2}' )
+
+tar -czvf $HOME/backup/oldest_files.tar.gz -C $folder_path $oldest_files 
 
 for file in $oldest_files; do
   echo "Удаляем файл $file"
-  rm $folder_path'/'$file
+  #rm $folder_path'/'$file
 done
 
 # Возвращаем код 0, если все прошло успешно
